@@ -10,7 +10,7 @@
 // const inputElement = document.querySelector('.js-input');
 // const searchBtn = document.querySelector('.js-searchBtn');
 // const resetBtn = document.querySelector('.js-resetBtn');
-// const cocktailsList = document.querySelector('.js-cocktails');
+const cocktailsList = document.querySelector('.js-cocktailsUl');
 // const favoritesList = document.querySelector('.js.favorites');
 const margaritasUrl = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=margarita';
 let listMargaritasData = [];
@@ -23,8 +23,20 @@ fetch(margaritasUrl)
     listMargaritasData = data.drinks.map((showDrink) => ({
       name: showDrink.strDrink,
       photo: showDrink.strDrinkThumb,
+      id: showDrink.idDrink
     }));
-    console.log(listMargaritasData);
+    console.log(listMargaritasData); //donde pintarlo -> cambiarlo por el render
   });
+
+//? function to paint the list of delicious cocktails
+function renderCocktails(drinks) {
+  for (const eachDrink of drinks) {
+    if (eachDrink.photo) {
+      cocktailsList.innerHTML += `<li class="js-liDrink" id="${eachDrink.id}"><h4>${eachDrink.name}</h4><img src="${eachDrink.photo}"`
+    } else {
+
+    }
+  }
+}
 
 
