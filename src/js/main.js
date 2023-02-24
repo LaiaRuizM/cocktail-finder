@@ -32,6 +32,17 @@ fetch(url)
     //renderFavoritesList(favoritesList);
   });
 
+const favLs = JSON.parse(localStorage.getItem('cocktailElement'));  
+function getFav() {
+  if (favLs) {
+    favoritesListArray = favLs;
+    renderFavoritesList(favoritesListArray);
+    console.log('HOLISSSSSS');
+  }
+}
+
+getFav(); // obtain the data of LS.
+
 //? function to paint the list of delicious cocktails
 function renderCocktails(drinks) {
   for (const eachDrink of drinks) {
@@ -58,7 +69,7 @@ function handleClickSearch(ev) {
       }));
       cocktailsList.innerHTML = ''; //
       renderCocktails(cocktailsListData); //donde pintarlo -> cambiarlo por el render -> OK
-      renderFavoritesList(favoritesList);
+      //renderFavoritesList(favoritesList);
     });
 }
 
@@ -78,6 +89,7 @@ function handleClickList(ev) {
     favoritesListArray.splice(cocktailIndex, 1); // splice = elimina un elemento a partir de una posición y con el 1 indicamos que no borre todo, que se elimine él, si es 2 es él mismo + next y así.
   }
   renderFavoritesList(favoritesListArray);
+  localStorage.setItem('cocktailElement', JSON.stringify(favoritesListArray));
 }
 
 function renderFavoritesList(drinkFav) {
@@ -87,7 +99,6 @@ function renderFavoritesList(drinkFav) {
     favoritesList.innerHTML += `<li class="js-liDrink" id="${eachDrinkFav.id}"><h4>${eachDrinkFav.name}</h4><img src="${eachDrinkFav.photo}" title="${eachDrinkFav.name}" alt="${eachDrinkFav.name}" class="cocktailImg"/></li>`;
   }
 }
-
 
 //* Events
 searchBtn.addEventListener('click', handleClickSearch);

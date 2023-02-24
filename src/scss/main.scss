@@ -10,11 +10,17 @@
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
-    background-color: cyan;
+    background-color: lightgrey;
 }
 
 .cocktailImg {
     height: 295px;
     width: 210px;
 }
+
+.selected {
+    background-color: lightcoral;
+    color: white;
+}
+
 
