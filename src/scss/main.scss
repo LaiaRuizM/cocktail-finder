@@ -6,11 +6,47 @@
 @import 'layout/footer';
 @import 'pages/index';
 
-.section--2 {
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Zeyada', cursive;
+}
+
+// .main--section--2 {
+//     display: flex;
+//     flex-direction: column;
+// }
+
+.main--section--2 {
     display: flex;
-    flex-direction: row;
+    //flex-direction: row;
     justify-content: space-evenly;
     background-color: lightgrey;
+    &--article1 {
+        border: 4px dashed rgb(244, 154, 154);   
+    &__title {
+        text-transform: uppercase;
+        font-weight: bold;
+        text-align: center;
+    }
+    &__ul {
+
+    }
+    }
+    &--article2 {
+        border: 4px dashed rgb(244, 154, 154);
+
+    &__title {
+        text-transform: uppercase;
+        font-weight: bold;
+        text-align: center;
+    }
+
+    &__ul {
+
+    }
+    }
 }
 
 .cocktailImg {
@@ -19,28 +55,59 @@
 }
 
 .selected {
-    background-color: lightcoral;
+    background-color: rgb(244, 154, 154);
     color: white;
 }
 
-.animatedCocktail {
-    height: 100px;
-    width: 120px;
-    filter: fliph;
-}
-
 .header {
-    margin-left: 0;
-    &--back {
-        transform: scaleX(-1);
-        //filter: fliph;
+    //margin-left: 0;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    //top: 0px;
+    //width: 100%;
+    &--title {
+        font-size: 50px;
+        padding: 25px 0 25px 0;
+        background-color: lightgray;
+        font-family: 'Bebas Neue', cursive;
+    &__2 {
+        font-size: 20px;
+        padding-left: 50px;
+        background-color: rgb(247, 202, 202);
+        color: rgb(111, 108, 108);
+        font-family: 'Bebas Neue', cursive;
+    }
+    }
+    // &--container__animatedCocktail {
+    //     padding: 20px;
+    //     background-color: #14d9c4;
+    //     height: 100px;
+    //     width: 125px;
+    //     display: flex;
+    //     contain: layout;
+    // }
+    &--container__drinks {
+        transition: 5s ease-in-out;
+        transform: scaleX(-1.5);
         cursor: pointer;
-        padding: 20px;
-        height: 100px;
-        width: 120px;
-        transition: margin-left 3s ease-in-out;
+        //padding: 5px;
+        height: 150px;
+        margin: 20px 180px 20px 180px;
+        border: 2px dashed rgb(244, 154, 154);
+    }
+    &--container__p {
+        font-size: 20px;
+        font-style: to-lower-case;
+        padding-left: 7px;
+        font-family: 'Bebas Neue';
+        background-color: rgb(247, 202, 202);
+        color: rgb(111, 108, 108);
+        margin-bottom: 20px;
     }
 }
 
-
+.header--container {
+    margin-left: 35px;
+}
 

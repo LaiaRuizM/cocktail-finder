@@ -16,13 +16,19 @@ fetch(url)
   .then((response) => response.json())
   .then((data) => {
     console.log(data); //? To see which property I have to chose (drinks). From the API (object array). This console shows an array 6 [0-5].
-    cocktailsListData = data.drinks.map((showDrink) => ({ //? data.drinks is use to obtain the data of each cocktail and the MAP is use here just to make a new array with the information that I need, such as: name, photo, id -> this way, I can avoid using "strDrink", instead I can use "name"
-      name: showDrink.strDrink,
-      photo: showDrink.strDrinkThumb,
-      id: showDrink.idDrink,
-    }));
+    mapArray(data);
     renderCocktails(cocktailsListData); //? Inside the Fetch bc until then is not executed, it is empty -> To be paint after getting the data
   });
+
+//* Function to avoid repetitive code.
+function mapArray(fetchArray) {
+  cocktailsListData = fetchArray.drinks.map((showDrink) => ({ //? data.drinks is use to obtain the data of each cocktail and the MAP is use here just to make a new array with the information that I need, such as: name, photo, id -> this way, I can avoid using "strDrink", instead I can use "name"
+    name: showDrink.strDrink,
+    photo: showDrink.strDrinkThumb,
+    id: showDrink.idDrink,
+  }));
+}
+
 
 //* When the user enter to the website or refresh the page, this function is going to be executed
 //* In line 95 the data of save cocktails has been send to LS (setItem), so now we have to pick them up (getItem) -> to show on the nav.
@@ -45,13 +51,13 @@ function handleClickSearch(ev) {
   fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${inputUserCocktail}`)
     .then((response) => response.json())
     .then((data) => {
-      cocktailsListData = data.drinks.map((showDrink) => ({
-        name: showDrink.strDrink,
-        photo: showDrink.strDrinkThumb,
-        id: showDrink.idDrink,
-      }));
-      cocktailsList.innerHTML = ''; // We put an empty value in cocktailsList (ul list) to avoid overwriting this list and showing the user's inputs.
-      renderCocktails(cocktailsListData); //todo (below) 
+      if (data.drinks === null) {
+        cocktailsList.innerHTML = 'Oh, vaya, parece que todavía no tenemos este cóctel. ¡Vamos a tenerlo en cuenta para ampliar nuestra variedad!';
+      } else {
+        mapArray(data);
+        cocktailsList.innerHTML = ''; // We put an empty value in cocktailsList (ul list) to avoid overwriting this list and showing the user's inputs.
+        renderCocktails(cocktailsListData); //todo (below) 
+      }
     });
 }
 
@@ -71,8 +77,8 @@ function renderCocktails(drinks) {
 
 // function already() {
 //   const cocktailIsFav = favoritesListArray.find(eachCocktailFav => cocktailsListData.id === eachCocktailFav.id);
-//   if (cocktailIsFav !== undefined) {  //adds the class selected
-//     cocktailsList.classList.toggle('selected');
+//   if (cocktailIsFav !== -1) {  //adds the class selected
+//     cocktailIsFav = 'selected';
 //   }
 // }
 // already();
