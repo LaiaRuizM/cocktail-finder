@@ -1,39 +1,34 @@
 'use strict';
 
-//*
-//!
-//?
-//
-//todo
-
-//* Global variables - cogemos elementos del HTML
+//* Global variables -> to get the HTML element
 const inputElement = document.querySelector('.js-input');
 const searchBtn = document.querySelector('.js-searchBtn');
 // const resetBtn = document.querySelector('.js-resetBtn');
 const cocktailsList = document.querySelector('.js-cocktailsUl');
-const favoritesList = document.querySelector('.js-favoritesUl'); //ul favs
+const favoritesList = document.querySelector('.js-favoritesUl'); 
 const url =
   `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=margarita`;
-let cocktailsListData = []; 
-let favoritesListArray = [];  // es el array para recoger el listado de las favoritas: favoritesList -> listado para meter los cócteles listArrayFavorite
-// let listArrayFavorite = []; listado para meter los favoritos -> ELIMINAR
+let cocktailsListData = []; // Empty array to fill the API with user's data
+let favoritesListArray = [];  // Empty array to fill getting the favorite list (favoritesList)
 
-//? When the user is loading the page the list of Margaritas should appear
+//? Server request. When the user is loading the page, the list of Cocktails should appear -> cocktailsListData
 fetch(url)
   .then((response) => response.json())
   .then((data) => {
-    console.log(data); // to see which property I have to chose (drinks)
-    cocktailsListData = data.drinks.map((showDrink) => ({
+    console.log(data); //? To see which property I have to chose (drinks). From the API (object array). This console shows an array 6 [0-5].
+    cocktailsListData = data.drinks.map((showDrink) => ({ //? data.drinks is use to obtain the data of each cocktail and the MAP is use here just to make a new array with the information that I need, such as: name, photo, id -> this way, I can avoid using "strDrink", instead I can use "name"
       name: showDrink.strDrink,
       photo: showDrink.strDrinkThumb,
       id: showDrink.idDrink,
     }));
-    renderCocktails(cocktailsListData); //donde pintarlo -> cambiarlo por el render
-    //renderFavoritesList(favoritesList);
+    renderCocktails(cocktailsListData); //? Inside the Fetch bc until then is not executed, it is empty -> To be paint after getting the data
   });
 
-const favLs = JSON.parse(localStorage.getItem('cocktailElement'));  
+//* When the user enter to the website or refresh the page, this function is going to be executed
+//* In line 95 the data of save cocktails has been send to LS (setItem), so now we have to pick them up (getItem) -> to show on the nav.
+//* We recall the function below
 function getFav() {
+  const favLs = JSON.parse(localStorage.getItem('cocktailElement'));  
   if (favLs) {
     favoritesListArray = favLs;
     renderFavoritesList(favoritesListArray);
@@ -41,21 +36,9 @@ function getFav() {
   }
 }
 
-getFav(); // obtain the data of LS.
+getFav(); //* obtain the data of LS.
 
-//? function to paint the list of delicious cocktails
-function renderCocktails(drinks) {
-  for (const eachDrink of drinks) {
-    if (eachDrink.photo) {
-      cocktailsList.innerHTML += `<li class="js-liDrink" id="${eachDrink.id}"><h4>${eachDrink.name}</h4><img src="${eachDrink.photo}" title="${eachDrink.name}" alt="${eachDrink.name}" class="cocktailImg"/></li>`;
-    } else {
-      cocktailsList.innerHTML += `<li class="js-liDrink" id="${eachDrink.id}"><h4>${eachDrink.name}</h4><img src="https://www.drinksco.es/blog/assets/uploads/sites/2/2020/05/cocktail-3327242_1920-1170x780.jpg" title="${eachDrink.name}" alt="${eachDrink.name}" class="cocktailImg"/></li>`;
-    }
-  }
-  addEventToLis(); // para ejecutar la función click del las lis. Para activar el click, en este momento tiene que hacerse el click -> ejecutamos la función del evento del click
-}
-
-// Function handleClickSearch button to search any kind of cocktail
+// Function handleClickSearch button to search any kind of cocktail. We put a FETCH with the API's link obtaining the user's value (inputElement.value -> box).
 function handleClickSearch(ev) {
   ev.preventDefault();
   const inputUserCocktail = inputElement.value.toLowerCase();
@@ -67,31 +50,47 @@ function handleClickSearch(ev) {
         photo: showDrink.strDrinkThumb,
         id: showDrink.idDrink,
       }));
-      cocktailsList.innerHTML = ''; //
-      renderCocktails(cocktailsListData); //donde pintarlo -> cambiarlo por el render -> OK
-      //renderFavoritesList(favoritesList);
+      cocktailsList.innerHTML = ''; // We put an empty value in cocktailsList (ul list) to avoid overwriting this list and showing the user's inputs.
+      renderCocktails(cocktailsListData); //todo (below) 
     });
 }
 
-//* Function to add cocktails to favorite list
+//todo function to paint the list of different delicious cocktails -> Scroll through the ul list and selects the objects
+//todo This function is going to be recall (above) bc of the "slowly's" Fetch process
+function renderCocktails(drinks) {
+  for (const eachDrink of drinks) {
+    if (eachDrink.photo) {
+      cocktailsList.innerHTML += `<li class="js-liDrink" id="${eachDrink.id}"><h4>${eachDrink.name}</h4><img src="${eachDrink.photo}" title="${eachDrink.name}" alt="${eachDrink.name}" class="cocktailImg"/></li>`;
+    } else {
+      cocktailsList.innerHTML += `<li class="js-liDrink" id="${eachDrink.id}"><h4>${eachDrink.name}</h4><img src="https://www.drinksco.es/blog/assets/uploads/sites/2/2020/05/cocktail-3327242_1920-1170x780.jpg" title="${eachDrink.name}" alt="${eachDrink.name}" class="cocktailImg"/></li>`;
+    }
+  }
+  addEventToLis(); //todo To run the click function of LIs. It is to activate the click, in this moment, the click action should happen -> Execute the event click function (line 112)
+}
+
+//* Function to add cocktails to favorite list -> addEvList of Li.
+//* Find = returns the full object which performs the condition.
+//* Splice = changes the array's content. You can extract one and put another one. 1st: "from where -> the position of the element that I want to extract the info" and 2nd: "until where -> how many I want to extract"  --> Ex: from cocktailIndex position, I want to extract 1.
+//* Push = to add an element/s at the end of the array.
+//* ev.cT.id -> To search with this id on cocktails list which cocktail has the cT id's.
 function handleClickList(ev) {
   console.log(ev.currentTarget.id);
   const idSelected = ev.currentTarget.id;
-  const cocktailSelected = cocktailsListData.find(cocktailItem => cocktailItem.id === idSelected); 
-  //console.log(cocktailSelected);
-  const cocktailIndex = favoritesListArray.findIndex(cocktailItem => cocktailItem.id === idSelected); // el index es la posición
+  const cocktailSelected = cocktailsListData.find(cocktailItem => cocktailItem.id === idSelected);  
+  const cocktailIndex = favoritesListArray.findIndex(cocktailItem => cocktailItem.id === idSelected); 
   console.log(cocktailIndex);
-  if (cocktailIndex === -1) {  // Compruebo si existe el favorito cocktailIndex, si no existe en favoritos (-1), pues lo añado (push) en favoritos -> ADD
+  if (cocktailIndex === -1) {  //* Check if cocktailIndex favorite; if does not exist in favorites (-1), I will add it (push) to favs -> ADD
     ev.currentTarget.classList.add('selected');
     favoritesListArray.push(cocktailSelected);
-  } else {
-    ev.currentTarget.classList.remove('selected'); // Compruebo si existe el favorito, si existe en favoritos (i), pues lo elimino (splice) de favoritos -> REMOVE
-    favoritesListArray.splice(cocktailIndex, 1); // splice = elimina un elemento a partir de una posición y con el 1 indicamos que no borre todo, que se elimine él, si es 2 es él mismo + next y así.
+  } else {                                          //* I check if fav's exist; if it exists (i), I will delete it (splice) to favs -> REMOVE
+    ev.currentTarget.classList.remove('selected');
+    favoritesListArray.splice(cocktailIndex, 1); 
   }
   renderFavoritesList(favoritesListArray);
-  localStorage.setItem('cocktailElement', JSON.stringify(favoritesListArray));
+  localStorage.setItem('cocktailElement', JSON.stringify(favoritesListArray)); //? We add the fav. list [] to Local through setItem. Here the fav.List[] is created. First we save them and then we will need to catch and obtain the data (getItem -> line 38).
 }
 
+// Paint all the favorites elements (ul fav)
 function renderFavoritesList(drinkFav) {
   favoritesList.innerHTML = '';
   console.log('holis');
@@ -104,11 +103,10 @@ function renderFavoritesList(drinkFav) {
 searchBtn.addEventListener('click', handleClickSearch);
 
 
-//* Event listener in any kind of cocktails (drinks) list
+//todo Event listener in any kind of cocktails (drinks) list. -> In line 75
 function addEventToLis() {
   const liDrinkElements = document.querySelectorAll('.js-liDrink');
   for (const eachLi of liDrinkElements) {
     eachLi.addEventListener('click', handleClickList);
   }
-
 }
