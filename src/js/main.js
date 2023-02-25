@@ -71,11 +71,10 @@ function renderCocktails(drinks) {
 
 // function already() {
 //   const cocktailIsFav = favoritesListArray.find(eachCocktailFav => cocktailsListData.id === eachCocktailFav.id);
-//   if (cocktailIsFav) {
+//   if (cocktailIsFav !== undefined) {  //adds the class selected
 //     cocktailsList.classList.toggle('selected');
 //   }
 // }
-
 // already();
 
 //* Function to add cocktails to favorite list -> addEvList of Li.
