@@ -20,7 +20,7 @@ fetch(url)
     renderCocktails(cocktailsListData); //? Inside the Fetch bc until then is not executed, it is empty -> To be paint after getting the data
   });
 
-//* Function to avoid repetitive code.
+//* Function to avoid repetitive code
 function mapArray(fetchArray) {
   cocktailsListData = fetchArray.drinks.map((showDrink) => ({ //? data.drinks is use to obtain the data of each cocktail and the MAP is use here just to make a new array with the information that I need, such as: name, photo, id -> this way, I can avoid using "strDrink", instead I can use "name"
     name: showDrink.strDrink,
