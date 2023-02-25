@@ -28,7 +28,7 @@ fetch(url)
 //* In line 95 the data of save cocktails has been send to LS (setItem), so now we have to pick them up (getItem) -> to show on the nav.
 //* We recall the function below
 function getFav() {
-  const favLs = JSON.parse(localStorage.getItem('cocktailElement'));  
+  const favLs = JSON.parse(localStorage.getItem('cocktailsElements'));  
   if (favLs) {
     favoritesListArray = favLs;
     renderFavoritesList(favoritesListArray);
@@ -87,7 +87,7 @@ function handleClickList(ev) {
     favoritesListArray.splice(cocktailIndex, 1); 
   }
   renderFavoritesList(favoritesListArray);
-  localStorage.setItem('cocktailElement', JSON.stringify(favoritesListArray)); //? We add the fav. list [] to Local through setItem. Here the fav.List[] is created. First we save them and then we will need to catch and obtain the data (getItem -> line 38).
+  localStorage.setItem('cocktailsElements', JSON.stringify(favoritesListArray)); //? We add the fav. list [] to Local through setItem. Here the fav.List[] is created. First we save them and then we will need to catch and obtain the data (getItem -> line 38). -> cocktailsElements = key LS.
 }
 
 // Paint all the favorites elements (ul fav)
@@ -95,13 +95,26 @@ function renderFavoritesList(drinkFav) {
   favoritesList.innerHTML = '';
   console.log('holis');
   for (const eachDrinkFav of drinkFav) {
-    favoritesList.innerHTML += `<li class="js-liDrink" id="${eachDrinkFav.id}"><h4>${eachDrinkFav.name}</h4><img src="${eachDrinkFav.photo}" title="${eachDrinkFav.name}" alt="${eachDrinkFav.name}" class="cocktailImg"/></li>`;
+    favoritesList.innerHTML += `<li class="js-liDrink" id="${eachDrinkFav.id}"><h4>${eachDrinkFav.name} <i class="fa-regular fa-trash-can js-iconX" id="${eachDrinkFav.id}"></i></h4><img src="${eachDrinkFav.photo}" title="${eachDrinkFav.name}" alt="${eachDrinkFav.name}" class="cocktailImg"/></li>`;
   }
+  addEventToX();
+}
+
+//* Function addEvList of iconX
+function handleClickIcon(event) {
+  event.preventDefault();
+  const idSelected = event.currentTarget.id;
+  const cocktailIndex = favoritesListArray.findIndex(cocktailItem => cocktailItem.id === idSelected); 
+  if (cocktailIndex !== -1) {
+    favoritesListArray.splice(cocktailIndex, 1);
+  }
+  renderFavoritesList(favoritesListArray);
+  renderCocktails(cocktailsListData);
+  localStorage.setItem('cocktailsElements', JSON.stringify(favoritesListArray));
 }
 
 //* Events
 searchBtn.addEventListener('click', handleClickSearch);
-
 
 //todo Event listener in any kind of cocktails (drinks) list. -> In line 75
 function addEventToLis() {
@@ -111,6 +124,15 @@ function addEventToLis() {
   }
 }
 
+//* Delete favorites pressing "x"
+function addEventToX() {
+  const iconsX = document.querySelectorAll('.js-iconX');
+  for (const eachIconX of iconsX) {
+    eachIconX.addEventListener('click', handleClickIcon);
+  }
+}
+
+//* Delete favorites pressing the photo ---- HERE ----
 
 
 // //* Animation cocktail
