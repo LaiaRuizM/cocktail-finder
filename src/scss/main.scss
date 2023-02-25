@@ -23,4 +23,24 @@
     color: white;
 }
 
+.animatedCocktail {
+    height: 100px;
+    width: 120px;
+    filter: fliph;
+}
+
+.header {
+    margin-left: 0;
+    &--back {
+        transform: scaleX(-1);
+        //filter: fliph;
+        cursor: pointer;
+        padding: 20px;
+        height: 100px;
+        width: 120px;
+        transition: margin-left 3s ease-in-out;
+    }
+}
+
+
 

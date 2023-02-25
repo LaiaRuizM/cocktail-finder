@@ -110,3 +110,27 @@ function addEventToLis() {
     eachLi.addEventListener('click', handleClickList);
   }
 }
+
+
+
+// //* Animation cocktail
+// const moveDrinks = document.querySelector('.js-moveDrinks');
+// moveDrinks.onclick = function() {
+//   this.onclick = null; // solo el primer clic debe comenzar la animación
+//   let times = 1;
+//   function go() {
+//     if (times % 2) {
+//       moveDrinks.classList.remove('back');
+//       moveDrinks.style.marginLeft = 100 * times + 200 + 'px';
+//     } else {
+//       moveDrinks.classList.add('back');
+//       moveDrinks.style.marginLeft = 100 * times - 200 + 'px';
+//     }
+//   }
+
+//   go();
+//   moveDrinks.addEventListener('transitionend', function() {
+//     times++;
+//     go();
+//   });
+// };  
