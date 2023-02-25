@@ -3,7 +3,7 @@
 //* Global variables -> to get the HTML element
 const inputElement = document.querySelector('.js-input');
 const searchBtn = document.querySelector('.js-searchBtn');
-// const resetBtn = document.querySelector('.js-resetBtn');
+const resetBtn = document.querySelector('.js-resetBtn');
 const cocktailsList = document.querySelector('.js-cocktailsUl');
 const favoritesList = document.querySelector('.js-favoritesUl'); 
 const url =
@@ -66,7 +66,17 @@ function renderCocktails(drinks) {
     }
   }
   addEventToLis(); //todo To run the click function of LIs. It is to activate the click, in this moment, the click action should happen -> Execute the event click function (line 112)
+  //* Check if the selected cocktail is on favoritesListArray
 }
+
+// function already() {
+//   const cocktailIsFav = favoritesListArray.find(eachCocktailFav => cocktailsListData.id === eachCocktailFav.id);
+//   if (cocktailIsFav) {
+//     cocktailsList.classList.toggle('selected');
+//   }
+// }
+
+// already();
 
 //* Function to add cocktails to favorite list -> addEvList of Li.
 //* Find = returns the full object which performs the condition.
@@ -74,16 +84,17 @@ function renderCocktails(drinks) {
 //* Push = to add an element/s at the end of the array.
 //* ev.cT.id -> To search with this id on cocktails list which cocktail has the cT id's.
 function handleClickList(ev) {
+  ev.currentTarget.classList.toggle('selected');
   console.log(ev.currentTarget.id);
   const idSelected = ev.currentTarget.id;
-  const cocktailSelected = cocktailsListData.find(cocktailItem => cocktailItem.id === idSelected);  
-  const cocktailIndex = favoritesListArray.findIndex(cocktailItem => cocktailItem.id === idSelected); 
+  const cocktailSelected = cocktailsListData.find(cocktailItem => cocktailItem.id === idSelected);  //* To introduce the selected object into cocktailSelected (id)
+  const cocktailIndex = favoritesListArray.findIndex(cocktailItem => cocktailItem.id === idSelected); //* To check if it is in the fav []
   console.log(cocktailIndex);
   if (cocktailIndex === -1) {  //* Check if cocktailIndex favorite; if does not exist in favorites (-1), I will add it (push) to favs -> ADD
-    ev.currentTarget.classList.add('selected');
+    //ev.currentTarget.classList.add('selected');
     favoritesListArray.push(cocktailSelected);
   } else {                                          //* I check if fav's exist; if it exists (i), I will delete it (splice) to favs -> REMOVE
-    ev.currentTarget.classList.remove('selected');
+    //ev.currentTarget.classList.remove('selected');
     favoritesListArray.splice(cocktailIndex, 1); 
   }
   renderFavoritesList(favoritesListArray);
@@ -113,6 +124,15 @@ function handleClickIcon(event) {
   localStorage.setItem('cocktailsElements', JSON.stringify(favoritesListArray));
 }
 
+function handleClickReset(ev) {
+  ev.preventDefault();
+  cocktailsList.innerHTML = '';
+  favoritesList.innerHTML = '';
+  localStorage.removeItem('cocktailsElements');
+  location.reload(); //* This method reloads the current document
+
+}
+
 //* Events
 searchBtn.addEventListener('click', handleClickSearch);
 
@@ -124,7 +144,7 @@ function addEventToLis() {
   }
 }
 
-//* Delete favorites pressing "x"
+//* Delete each favorite pressing "x"  --> ADV: LA PRIMERA HAY QUE HACER DOBLE CLICK - MIRARLO.
 function addEventToX() {
   const iconsX = document.querySelectorAll('.js-iconX');
   for (const eachIconX of iconsX) {
@@ -132,8 +152,8 @@ function addEventToX() {
   }
 }
 
-//* Delete favorites pressing the photo ---- HERE ----
-
+//* Reset all favorites
+resetBtn.addEventListener('click', handleClickReset);
 
 // //* Animation cocktail
 // const moveDrinks = document.querySelector('.js-moveDrinks');
