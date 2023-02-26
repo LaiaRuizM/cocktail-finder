@@ -34,15 +34,16 @@ function mapArray(fetchArray) {
 //* When the user enter to the website or refresh the page, this function is going to be executed
 //* In line 95 the data of save cocktails has been send to LS (setItem), so now we have to pick them up (getItem) -> to show on the nav.
 //* We recall the function below
+//* favLs -> !== null -> cuando es diferente a nulo, o sea, cuando tiene un valor.
 function getFav() {
   const favLs = JSON.parse(localStorage.getItem('cocktailsElements'));  
-  if (favLs) {
-    favoritesListArray = favLs;
+  if (favLs) { 
+    favoritesListArray = favLs; // ahora la global es igual a la local. Lo que saco de la LS, lo guardo en la global. Alguien va a usar el favoritesListArray y queremos que tenga ese valor actualizado.
     renderFavoritesList(favoritesListArray);
     console.log('HOLISSSSSS');
   }
 }
-getFav(); //* obtain the data of LS.
+getFav(); //* obtain the update data of LS.
 
 // Function handleClickSearch button to search any kind of cocktail. We put a FETCH with the API's link obtaining the user's value (inputElement.value -> box).
 function handleClickSearch(ev) {
@@ -88,7 +89,7 @@ function renderCocktails(drinks) {
 //* Splice = changes the array's content. You can extract one and put another one. 1st: "from where -> the position of the element that I want to extract the info (cocktailIndex)" and 2nd: "until where -> how many I want to extract (1)"  --> Ex: from cocktailIndex position, I want to extract 1. -> si pusiera cocktailIndex, 2, me eliminaría desde donde he clicado, o sea, ese + el siguiente.
 //* Push = to add an element/s at the end of the array.
 //* ev.cT.id -> To search with this id on cocktails list which cocktail has the cT id's.
-//* The position taht returns is the fav position!
+//* The position that returns is the fav position!
 function handleClickList(ev) {
   ev.currentTarget.classList.toggle('selected');
   console.log(ev.currentTarget.id);
