@@ -11,10 +11,11 @@
     gap: 20px;
     &__title {
     font-family: 'Indie Flower', cursive;
+    color: rgb(111, 108, 108);
     }
     &__link {
         text-decoration: none;
-        cursor: col-resize;
+        cursor: alias;
         color: rgba(244, 154, 154, 0.95);
     }
    }
@@ -33,6 +34,15 @@
     gap: 20px;
     &__link {
         font-family: 'Indie Flower', cursive;
+        cursor: alias;
+        text-decoration: none;
+        color: rgba(244, 154, 154, 0.95);
+    }
+    &__span {
+        font-family: 'Indie Flower', cursive;
+        cursor: alias;
+        text-decoration: none;
+        color: rgb(111, 108, 108);
     }
    }
 }
