@@ -1,2 +1,49 @@
 .header {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    background: linear-gradient(lightgray, whitesmoke);
+    &--title {
+        font-size: 60px;
+        font-weight: 600;
+        padding: 25px 0 25px 0;
+        background: linear-gradient(lightgray, rgb(111, 108, 108));
+        color: whitesmoke;
+        font-family: 'Indie Flower', cursive; 
+    &__2 {
+        font-size: 20px;
+        padding-left: 50px;
+        background-color: rgb(247, 202, 202);
+        color: rgb(111, 108, 108);
+        font-family: 'Indie Flower', cursive;
+        margin-top: 20px;
+    }
+    }
+    &--container {
+        margin-left: 35px;
+    &__drinks {
+        transition: 5s ease-in-out;
+        transform: scaleX(-1.5);
+        cursor: move;
+        height: 150px;
+        margin: 20px 180px 20px 180px;
+        border: 2px dashed rgb(244, 154, 154);
+    }
+    }
+    &--container2 {
+    &__p {
+        padding-left: 50px;
+        margin-bottom: 20px;
+        font-size: 20px;
+        background-color: rgb(247, 202, 202);
+        color: rgb(111, 108, 108);
+        font-family: 'Indie Flower', cursive;
+    }
+    &__icon {
+        width: 50px;
+        color: black;
+    }
+    }
 }
+
+

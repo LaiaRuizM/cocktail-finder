@@ -6,6 +6,7 @@ const searchBtn = document.querySelector('.js-searchBtn');
 const resetBtn = document.querySelector('.js-resetBtn');
 const cocktailsList = document.querySelector('.js-cocktailsUl');
 const favoritesList = document.querySelector('.js-favoritesUl'); 
+const deleteBtn = document.querySelector('.js-delete');
 const url =
   `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=margarita`;
 let cocktailsListData = []; // Empty array to fill the API with user's data
@@ -41,7 +42,6 @@ function getFav() {
     console.log('HOLISSSSSS');
   }
 }
-
 getFav(); //* obtain the data of LS.
 
 // Function handleClickSearch button to search any kind of cocktail. We put a FETCH with the API's link obtaining the user's value (inputElement.value -> box).
@@ -66,15 +66,15 @@ function handleClickSearch(ev) {
 function renderCocktails(drinks) {
   for (const eachDrink of drinks) {
     if (eachDrink.photo) {
-      cocktailsList.innerHTML += `<li class="js-liDrink" id="${eachDrink.id}"><h4>${eachDrink.name}</h4><img src="${eachDrink.photo}" title="${eachDrink.name}" alt="${eachDrink.name}" class="cocktailImg"/></li>`;
+      cocktailsList.innerHTML += `<li class="js-liDrink" id="${eachDrink.id}"><h3>${eachDrink.name}</h3><img src="${eachDrink.photo}" title="${eachDrink.name}" alt="${eachDrink.name}" class="cocktailImg"/></li>`;
     } else {
-      cocktailsList.innerHTML += `<li class="js-liDrink" id="${eachDrink.id}"><h4>${eachDrink.name}</h4><img src="https://www.drinksco.es/blog/assets/uploads/sites/2/2020/05/cocktail-3327242_1920-1170x780.jpg" title="${eachDrink.name}" alt="${eachDrink.name}" class="cocktailImg"/></li>`;
+      cocktailsList.innerHTML += `<li class="js-liDrink" id="${eachDrink.id}"><h3>${eachDrink.name}</h3><img src="https://www.drinksco.es/blog/assets/uploads/sites/2/2020/05/cocktail-3327242_1920-1170x780.jpg" title="${eachDrink.name}" alt="${eachDrink.name}" class="cocktailImg"/></li>`;
     }
   }
   addEventToLis(); //todo To run the click function of LIs. It is to activate the click, in this moment, the click action should happen -> Execute the event click function (line 112)
-  //* Check if the selected cocktail is on favoritesListArray
 }
 
+//* Check if the selected cocktail is on favoritesListArray
 // function already() {
 //   const cocktailIsFav = favoritesListArray.find(eachCocktailFav => cocktailsListData.id === eachCocktailFav.id);
 //   if (cocktailIsFav !== -1) {  //adds the class selected
@@ -112,7 +112,7 @@ function renderFavoritesList(drinkFav) {
   favoritesList.innerHTML = '';
   console.log('holis');
   for (const eachDrinkFav of drinkFav) {
-    favoritesList.innerHTML += `<li class="js-liDrink" id="${eachDrinkFav.id}"><h4>${eachDrinkFav.name} <i class="fa-regular fa-trash-can js-iconX" id="${eachDrinkFav.id}"></i></h4><img src="${eachDrinkFav.photo}" title="${eachDrinkFav.name}" alt="${eachDrinkFav.name}" class="cocktailImg"/></li>`;
+    favoritesList.innerHTML += `<li class="js-liDrink" id="${eachDrinkFav.id}"><h3>${eachDrinkFav.name} <i class="fa-regular fa-trash-can js-iconX" id="${eachDrinkFav.id}"></i></h3><img src="${eachDrinkFav.photo}" title="${eachDrinkFav.name}" alt="${eachDrinkFav.name}" class="cocktailImg"/></li>`;
   }
   addEventToX();
 }
@@ -126,7 +126,7 @@ function handleClickIcon(event) {
     favoritesListArray.splice(cocktailIndex, 1);
   }
   renderFavoritesList(favoritesListArray);
-  renderCocktails(cocktailsListData);
+  //renderCocktails(cocktailsListData);
   localStorage.setItem('cocktailsElements', JSON.stringify(favoritesListArray));
 }
 
@@ -136,6 +136,13 @@ function handleClickReset(ev) {
   favoritesList.innerHTML = '';
   localStorage.removeItem('cocktailsElements');
   location.reload(); //* This method reloads the current document
+}
+
+function handleClickDelete() {
+  cocktailsList.innerHTML = '';
+  favoritesList.innerHTML = '';
+  localStorage.removeItem('cocktailsElements');
+  location.reload();
 }
 
 //* Events
@@ -159,6 +166,10 @@ function addEventToX() {
 
 //* Reset all favorites
 resetBtn.addEventListener('click', handleClickReset);
+
+//* Delete favorites in his section
+deleteBtn.addEventListener('click', handleClickDelete);
+
 
 // //* Animation cocktail
 // const moveDrinks = document.querySelector('.js-moveDrinks');
