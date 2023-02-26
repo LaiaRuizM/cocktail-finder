@@ -6,12 +6,6 @@
 @import 'layout/footer';
 @import 'pages/index';
 
-
-// .allLists {
-//   display: grid;
-//   grid-template-columns: 1fr 1fr;
-//   width: 50%;
-// }
 .main {
     &--section--1 {
         display: flex;
@@ -20,7 +14,6 @@
         align-items: center;
         justify-content: center;
         margin: 20px 0 20px auto;
-        //background: linear-gradient(lightgray, whitesmoke);
         &__title {
             font-size: 25px;
         }
@@ -56,7 +49,6 @@
     &--section--2 {
     display: flex;
     background: linear-gradient(lightgray, rgb(111, 108, 108));
-    //background: linear-gradient(rgb(111, 108, 108), lightgray);
     box-shadow: -4px 3px 10px 10px black;
     &--article1 {
         box-shadow: 0px 0px 5px 1px black;
@@ -102,22 +94,18 @@
     width: 210px;
     margin: 10px 0 20px 20px;
     }
-
     .cocktailName1 {
         margin-left: 20px;
     }
-
     .cocktailImg2 {
         height: 295px;
         width: 210px;
         margin: 10px 20px 20px 20px;
     }
-
     .cocktailName2 {
         margin-left: 20px;
-        color: red;
+        color: whitesmoke;
     }
-
     .selected {
     background: linear-gradient(rgb(244, 154, 154), rgb(211, 211, 211));
     color: white;
