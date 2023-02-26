@@ -66,9 +66,9 @@ function handleClickSearch(ev) {
 function renderCocktails(drinks) {
   for (const eachDrink of drinks) {
     if (eachDrink.photo) {
-      cocktailsList.innerHTML += `<li class="js-liDrink" id="${eachDrink.id}"><h3>${eachDrink.name}</h3><img src="${eachDrink.photo}" title="${eachDrink.name}" alt="${eachDrink.name}" class="cocktailImg"/></li>`;
+      cocktailsList.innerHTML += `<li class="js-liDrink" id="${eachDrink.id}"><h3 class="cocktailName1">${eachDrink.name}</h3><img src="${eachDrink.photo}" title="${eachDrink.name}" alt="${eachDrink.name}" class="cocktailImg"/></li>`;
     } else {
-      cocktailsList.innerHTML += `<li class="js-liDrink" id="${eachDrink.id}"><h3>${eachDrink.name}</h3><img src="https://www.drinksco.es/blog/assets/uploads/sites/2/2020/05/cocktail-3327242_1920-1170x780.jpg" title="${eachDrink.name}" alt="${eachDrink.name}" class="cocktailImg"/></li>`;
+      cocktailsList.innerHTML += `<li class="js-liDrink" id="${eachDrink.id}"><h3 class="cocktailName1">${eachDrink.name}</h3><img src="https://www.drinksco.es/blog/assets/uploads/sites/2/2020/05/cocktail-3327242_1920-1170x780.jpg" title="${eachDrink.name} class="cocktailName" alt="${eachDrink.name}" class="cocktailImg"/></li>`;
     }
   }
   addEventToLis(); //todo To run the click function of LIs. It is to activate the click, in this moment, the click action should happen -> Execute the event click function (line 112)
@@ -112,7 +112,7 @@ function renderFavoritesList(drinkFav) {
   favoritesList.innerHTML = '';
   console.log('holis');
   for (const eachDrinkFav of drinkFav) {
-    favoritesList.innerHTML += `<li class="js-liDrink" id="${eachDrinkFav.id}"><h3>${eachDrinkFav.name} <i class="fa-regular fa-trash-can js-iconX" id="${eachDrinkFav.id}"></i></h3><img src="${eachDrinkFav.photo}" title="${eachDrinkFav.name}" alt="${eachDrinkFav.name}" class="cocktailImg"/></li>`;
+    favoritesList.innerHTML += `<li class="js-liDrink" id="${eachDrinkFav.id}"><h3 class="cocktailName2">${eachDrinkFav.name} <i class="fa-regular fa-trash-can js-iconX" id="${eachDrinkFav.id}"></i></h3><img src="${eachDrinkFav.photo}" title="${eachDrinkFav.name}" alt="${eachDrinkFav.name}" class="cocktailImg2"/></li>`;
   }
   addEventToX();
 }

@@ -16,10 +16,10 @@
     &--section--1 {
         display: flex;
         flex-direction: column;
-        gap: 20px;
+        gap: 15px;
         align-items: center;
         justify-content: center;
-        margin: 30px 0 50px auto;
+        margin: 20px 0 20px auto;
         //background: linear-gradient(lightgray, whitesmoke);
         &__title {
             font-size: 25px;
@@ -55,7 +55,6 @@
     }
     &--section--2 {
     display: flex;
-    //justify-content: space-evenly;
     background: linear-gradient(lightgray, rgb(111, 108, 108));
     //background: linear-gradient(rgb(111, 108, 108), lightgray);
     box-shadow: -4px 3px 10px 10px black;
@@ -70,9 +69,6 @@
         margin: 15px 15px;
         font-size: 20px;
     }
-    // &__ul {
-
-    // }
     }
     &--article2 {
         border: 4px dashed rgb(244, 154, 154);
@@ -84,11 +80,6 @@
         text-align: center;
         margin: 15px 15px;
         font-size: 20px;
-    }
-
-    &__ul {
-
-
     }
     &__delete {
         height: 60px;
@@ -109,7 +100,22 @@
     .cocktailImg {
     height: 295px;
     width: 210px;
-    margin: 10px 0 20px 0;
+    margin: 10px 0 20px 20px;
+    }
+
+    .cocktailName1 {
+        margin-left: 20px;
+    }
+
+    .cocktailImg2 {
+        height: 295px;
+        width: 210px;
+        margin: 10px 20px 20px 20px;
+    }
+
+    .cocktailName2 {
+        margin-left: 20px;
+        color: red;
     }
 
     .selected {

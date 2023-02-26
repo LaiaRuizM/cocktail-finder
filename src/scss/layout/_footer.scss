@@ -4,8 +4,8 @@
    align-items: center;
    border-top: 4px rgb(111, 108, 108);
    padding: 0 35px;
-   height: 70px;
-   margin: 20px;
+   height: 100px;
+   margin-top: 40px;
    &--container {
     display: flex;
     align-items: center;
@@ -13,32 +13,39 @@
     &__title {
     font-family: 'Indie Flower', cursive;
     color: rgb(111, 108, 108);
+    font-size: 18px;
     }
     &__link {
         text-decoration: none;
         cursor: alias;
         color: rgba(244, 154, 154, 0.95);
+        font-family: 'Indie Flower', cursive;
+        cursor: alias;
+        font-size: 20px;
     }
    }
    &--container2 {
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 20px;
     padding-right: 200px;
     &__img {
-        width: 50px;
-        height: 50px;
+        width: 150px;
+        height: 150px;
+        box-shadow: 0px 10px 10px -6px black;
+        margin-bottom: 5px;
     }
    }
    &--p {
     display: flex;
     align-items: center;
-    gap: 20px;
     &__link {
         font-family: 'Indie Flower', cursive;
         cursor: alias;
         text-decoration: none;
         color: rgba(244, 154, 154, 0.95);
+        font-size: 20px;
     }
     &__span {
         font-family: 'Indie Flower', cursive;
