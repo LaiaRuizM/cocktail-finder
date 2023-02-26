@@ -85,9 +85,10 @@ function renderCocktails(drinks) {
 
 //* Function to add cocktails to favorite list -> addEvList of Li.
 //* Find = returns the full object which performs the condition.
-//* Splice = changes the array's content. You can extract one and put another one. 1st: "from where -> the position of the element that I want to extract the info" and 2nd: "until where -> how many I want to extract"  --> Ex: from cocktailIndex position, I want to extract 1.
+//* Splice = changes the array's content. You can extract one and put another one. 1st: "from where -> the position of the element that I want to extract the info (cocktailIndex)" and 2nd: "until where -> how many I want to extract (1)"  --> Ex: from cocktailIndex position, I want to extract 1. -> si pusiera cocktailIndex, 2, me eliminaría desde donde he clicado, o sea, ese + el siguiente.
 //* Push = to add an element/s at the end of the array.
 //* ev.cT.id -> To search with this id on cocktails list which cocktail has the cT id's.
+//* The position taht returns is the fav position!
 function handleClickList(ev) {
   ev.currentTarget.classList.toggle('selected');
   console.log(ev.currentTarget.id);
@@ -135,7 +136,6 @@ function handleClickReset(ev) {
   favoritesList.innerHTML = '';
   localStorage.removeItem('cocktailsElements');
   location.reload(); //* This method reloads the current document
-
 }
 
 //* Events
