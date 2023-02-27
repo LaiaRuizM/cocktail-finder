@@ -1,6 +1,6 @@
 'use strict';
 
-//* Global variables -> to get the HTML element
+//* 1. Global variables -> to get the HTML element
 const inputElement = document.querySelector('.js-input');
 const searchBtn = document.querySelector('.js-searchBtn');
 const resetBtn = document.querySelector('.js-resetBtn');
@@ -8,20 +8,20 @@ const cocktailsList = document.querySelector('.js-cocktailsUl');
 const favoritesList = document.querySelector('.js-favoritesUl'); 
 const deleteBtn = document.querySelector('.js-delete');
 const url =
-  `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=margarita`;
+  `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=margarita`; // API (application Programming Interface) = A servidor offers a service in this URL 
 let cocktailsListData = []; // Empty array to fill the API with user's data
 let favoritesListArray = [];  // Empty array to fill getting the favorite list (favoritesList)
 
-//? Server request. When the user is loading the page, the list of Cocktails should appear -> cocktailsListData
-fetch(url)
-  .then((response) => response.json())
-  .then((data) => {
+//? 2. Server request. When the user is loading the page, the list of Cocktails should appear -> cocktailsListData - GET -> Alternative: mapArray creates his own local variable (const x) and returns cocktailsListData it (in 26 line) and in line 20 I will have to put const X = mapArray(data).
+fetch(url) //? I make the request
+  .then((response) => response.json()) //? Transform the response(answer).
+  .then((data) => { //? when you have this data is transformed.
     console.log(data); //? To see which property I have to chose (drinks). From the API (object array). This console shows an array 6 [0-5].
     mapArray(data);
-    renderCocktails(cocktailsListData); //? Inside the Fetch bc until then is not executed, it is empty -> To be paint after getting the data
+    renderCocktails(cocktailsListData); //? Inside the Fetch bc until then is not executed, it is empty -> To be paint after getting the data -> when it reloads.
   });
 
-//* Function to avoid repetitive code
+//* 3. Function to avoid repetitive code
 function mapArray(fetchArray) {
   cocktailsListData = fetchArray.drinks.map((showDrink) => ({ //? data.drinks is use to obtain the data of each cocktail and the MAP is use here just to make a new array with the information that I need, such as: name, photo, id -> this way, I can avoid using "strDrink", instead I can use "name"
     name: showDrink.strDrink,
@@ -36,7 +36,7 @@ function mapArray(fetchArray) {
 //* We recall the function below
 //* favLs -> !== null -> cuando es diferente a nulo, o sea, cuando tiene un valor.
 function getFav() {
-  const favLs = JSON.parse(localStorage.getItem('cocktailsElements'));  
+  const favLs = JSON.parse(localStorage.getItem('favCocktailsElements'));  
   if (favLs) { 
     favoritesListArray = favLs; // ahora la global es igual a la local. Lo que saco de la LS, lo guardo en la global. Alguien va a usar el favoritesListArray y queremos que tenga ese valor actualizado.
     renderFavoritesList(favoritesListArray);
@@ -45,7 +45,7 @@ function getFav() {
 }
 getFav(); //* obtain the update data of LS.
 
-// Function handleClickSearch button to search any kind of cocktail. We put a FETCH with the API's link obtaining the user's value (inputElement.value -> box).
+// 4. Function handleClickSearch button to search any kind of cocktail. We put a FETCH with the API's link obtaining the user's value (inputElement.value -> box).
 function handleClickSearch(ev) {
   ev.preventDefault();
   const inputUserCocktail = inputElement.value.toLowerCase();
@@ -66,13 +66,13 @@ function handleClickSearch(ev) {
 //todo This function is going to be recall (above) bc of the "slowly's" Fetch process
 function renderCocktails(drinks) {
   for (const eachDrink of drinks) {
-    if (eachDrink.photo) {
+    if (eachDrink.photo) { // for each element/drink
       cocktailsList.innerHTML += `<li class="js-liDrink" id="${eachDrink.id}"><h3 class="cocktailName1">${eachDrink.name}</h3><img src="${eachDrink.photo}" title="${eachDrink.name}" alt="${eachDrink.name}" class="cocktailImg"/></li>`;
     } else {
       cocktailsList.innerHTML += `<li class="js-liDrink" id="${eachDrink.id}"><h3 class="cocktailName1">${eachDrink.name}</h3><img src="https://www.drinksco.es/blog/assets/uploads/sites/2/2020/05/cocktail-3327242_1920-1170x780.jpg" title="${eachDrink.name} class="cocktailName1" alt="${eachDrink.name}" class="cocktailImg"/></li>`;
     }
   }
-  addEventToLis(); //todo To run the click function of LIs. It is to activate the click, in this moment, the click action should happen -> Execute the event click function (line 112)
+  addEventToLis(); //todo To run the click function of LIs. It is to activate the click, in this moment, the click action should happen -> Execute the event click function (line 112) -> for all lis add a listener
 }
 
 // //* Check if the selected cocktail is on favoritesListArray
@@ -96,27 +96,30 @@ function handleClickList(ev) {
   const idSelected = ev.currentTarget.id; // busca el id del cocktail seleccionado
   const cocktailSelected = cocktailsListData.find(cocktailItem => cocktailItem.id === idSelected);  //* To introduce the selected object into cocktailSelected (id)
   const cocktailIndex = favoritesListArray.findIndex(cocktailItem => cocktailItem.id === idSelected); //* To check if it is in the fav []
-  console.log(cocktailIndex);
-  if (cocktailIndex === -1) {  //* Check if cocktailIndex favorite; if does not exist in favorites (-1), I will add it (push) to favs -> ADD
+  console.log('indexToRemove:' + cocktailIndex);
+  console.log('handleClickList.favoritesListArray' + favoritesListArray);
+  if (cocktailIndex === -1) {  //* Check if cocktailIndex favorite exists; if does not exist in favorites (-1), I will add it (push) to favs -> ADD
     //ev.currentTarget.classList.add('selected');
     favoritesListArray.push(cocktailSelected);
-  } else {                                          //* I check if fav's exist; if it exists (i), I will delete it (splice) to favs -> REMOVE
+  } else {                                          //* I check if fav's exists; if it exists (i), I will delete it (splice) to favs -> REMOVE
     //ev.currentTarget.classList.remove('selected2');  //todo NOW
     favoritesListArray.splice(cocktailIndex, 1); 
   }
+  console.log('handleClickList.favoritesListArray' + favoritesListArray);
   renderFavoritesList(favoritesListArray);
-  localStorage.setItem('cocktailsElements', JSON.stringify(favoritesListArray)); //? We add the fav. list [] to Local through setItem. Here the fav.List[] is created. First we save them and then we will need to catch and obtain the data (getItem -> line 38). -> cocktailsElements = key LS.
+  localStorage.setItem('favCocktailsElements', JSON.stringify(favoritesListArray)); //? We add the fav. list [] to Local through setItem. Here the fav.List[] is created. First we save them and then we will need to catch and obtain the data (getItem -> line 38). -> favCocktailsElements = key LS.
   //addEventToLis(); //todo NOW - entonces no va la X, pero sí deja quitarlas clicando y ya.
 }
 
 // Paint all the favorites elements (ul fav)
 function renderFavoritesList(drinkFav) {
   favoritesList.innerHTML = '';
-  console.log('holis');
+  //console.log('holis');
   for (const eachDrinkFav of drinkFav) {
     favoritesList.innerHTML += `<li class="js-liDrink" id="${eachDrinkFav.id}"><h3 class="cocktailName2">${eachDrinkFav.name} <i class="trash fa-regular fa-trash-can js-iconX" id="${eachDrinkFav.id}"></i></h3><img src="${eachDrinkFav.photo}" title="${eachDrinkFav.name}" alt="${eachDrinkFav.name}" class="cocktailImg2"/></li>`;
   }
   addEventToX();
+  addEventToLis(); //todo NOW - pero no va la trash.
 }
 
 //* Function addEvList of iconX
@@ -125,25 +128,25 @@ function handleClickIcon(event) {
   const idSelected = event.currentTarget.id;
   const cocktailIndex = favoritesListArray.findIndex(cocktailItem => cocktailItem.id === idSelected); 
   if (cocktailIndex !== -1) {
-    favoritesListArray.splice(cocktailIndex, 1);
+    favoritesListArray.splice(cocktailIndex, 1); // In this position, removes one (the one that I am interested on)
   }
   renderFavoritesList(favoritesListArray);
   //renderCocktails(cocktailsListData);
-  localStorage.setItem('cocktailsElements', JSON.stringify(favoritesListArray));
+  localStorage.setItem('favCocktailsElements', JSON.stringify(favoritesListArray));
 }
 
-function handleClickReset(ev) {
-  ev.preventDefault();
-  cocktailsList.innerHTML = '';
+function handleClickReset() {
+  //ev.preventDefault(); // Hace falta solo en casos en que ese tipo de evento/btn tiene un default que no me sirva. Es un btn, porque es btn, no un submit.
+  //cocktailsList.innerHTML = ''; -> We do not need to put cocktailsList.innerHTML = '' bc when the nav reloads, the default list is margarita's one. It works bc of Fetch (urlMargarita).
   favoritesList.innerHTML = '';
-  localStorage.removeItem('cocktailsElements');
+  localStorage.removeItem('favCocktailsElements');
   location.reload(); //* This method reloads the current document
 }
 
 function handleClickDelete() {
-  cocktailsList.innerHTML = '';
+  //cocktailsList.innerHTML = '';
   favoritesList.innerHTML = '';
-  localStorage.removeItem('cocktailsElements');
+  localStorage.removeItem('favCocktailsElements');
   location.reload();
 }
 
@@ -153,12 +156,14 @@ searchBtn.addEventListener('click', handleClickSearch);
 //todo Event listener in any kind of cocktails (drinks) list. -> In line 75
 function addEventToLis() {
   const liDrinkElements = document.querySelectorAll('.js-liDrink');
+  console.log('addEventToLis.liDrinkElements' + liDrinkElements);
+  console.log('addEventToLis.favoritesListArray' + favoritesListArray);
   for (const eachLi of liDrinkElements) {
     eachLi.addEventListener('click', handleClickList);
   }
 }
 
-//* Delete each favorite pressing "x"  --> ADV: LA PRIMERA HAY QUE HACER DOBLE CLICK - MIRARLO.
+//* Delete each favorite pressing "x" (li)
 function addEventToX() {
   const iconsX = document.querySelectorAll('.js-iconX');
   for (const eachIconX of iconsX) {
