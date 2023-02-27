@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Módulo 2 - Evaluación final | Laia Ruiz Martínez</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&family=Shantell+Sans:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/aecde98a59.js" crossorigin="anonymous"></script>  
+  <link rel="stylesheet" href="./assets/css/main.css" />
+  <link rel="icon" href="./assets/images/favicon.png" />
+</head>
+<body>
+  <header class="header">
+      <h1 class="header--title">Desarrolla cócteles | Bebidas coquetas</h1>
+      <h2 class="header--title__2">All you need is attitude</h2>
+    <div class="header--container">
+      <video data-v-27edef16="" data-test="video-content" preload="auto"
+        src="https://cdn.dribbble.com/userupload/3494436/file/original-ea8f0e8fddc1682e5273ca37a272612e.mp4"
+        playsinline="true" loop="loop" draggable="false" class="header--container__drinks js-moveDrinks" autoplay="autoplay">
+      </video>
+    </div>
+    <div class="header--container2">
+      <p class="header--container2__p">
+        Hay momentos que merecen un buen brindis. Let's toast!<i
+          class="header--container2__icon fa-solid fa-champagne-glasses"
+        ></i>
+      </p>
+    </div>
+  </header>
+
+
+  <main class="main">
+      <section class="main--section--1">
+          <h2 class="main--section--1__title">Buscador de cócteles</h2>
+          <form class="main--section--1__inputs" action="#" method="get">
+          <input class="main--section--1__inputs__value js-input" type="text" placeholder="¡Busca un delicious cocktail!" title="Introduce aquí el nombre del delicious cocktail"/>
+          <input class="main--section--1__inputs__search js-searchBtn" type="button" value="Buscar" title="Haz click aquí para buscar un delicious cocktail"/>
+          <input class="main--section--1__inputs__reset js-resetBtn" type="button" value="Reset" title="Haz click aquí para reiniciar la delicious búsqueda"/>
+          </form>
+          <div class="main--section--1__div">
+              <img src="https://cdn.dribbble.com/users/1578200/screenshots/15524634/media/2345904b26ea7b27374117fb9df112e0.gif" title="Cocktail" alt="Cocktail" class="main--section--1__div__animatedCocktail" />
+          </div>
+      </section>
+      <section class="main--section--2">
+          <article class="main--section--2--article1">
+              <h2 class="main--section--2--article1__title">Resultados</h2>
+              <ul class="class=main--section--2--article1__ul js-cocktailsUl"></ul>
+          </article>
+          <article class="main--section--2--article2">
+              <h2 class="main--section--2--article2__title">Favoritos</h2>
+              <ul class="main--section--2--article2__ul js-favoritesUl"></ul>
+              <button class="main--section--2--article2__delete js-delete hidden">¡Borra tus favoritos<span main--section--2--article2__delete__span>♡</span>!</button>
+          </article>
+      </section>
+  </main>
+
+
+  <footer class="footer">
+      <div class="footer--container">
+          <small class="footer--container__title">Desarrolla cócteles | bebidas coquetas by <a class="footer--container__link" href="https://github.com/LaiaRuizM" title="GitHUb de Laia Ruiz Martínez" target="_blank">&copy;LaiaRuizM<i class="footer--container__icon fa-brands fa-github"></i></a></small>
+      </div>
+      <div class="footer--container2">
+          <img src="./assets/images/logo2.png" alt="Cocktail Laia's Logo" class="footer--container2__img">
+          <a class="footer--container__link" href="https://linkedin.com/in/laia-ruiz-martínez" title="Linkedin de Laia Ruiz Martínez"
+          target="_blank">Linkedin<i class="fa-brands fa-linkedin"></i></a>
+      </div>
+      <p class="footer--p">
+          <a class="footer--p__link" href="https://adalab.es/" target="_blank">&copy;Adalab <span class="footer--p__span">2023</span></a>
+      </p>
+  </footer>
+
+  <script src="./assets/js/main.js"></script>
+</body>
+</html>
