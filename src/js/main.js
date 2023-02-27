@@ -1,5 +1,5 @@
 'use strict';
-
+// --- RAMA CON COMENTARIOS ---
 //* 1. Global variables -> to get the HTML element
 const inputElement = document.querySelector('.js-input');
 const searchBtn = document.querySelector('.js-searchBtn');

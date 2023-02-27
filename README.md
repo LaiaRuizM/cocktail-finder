@@ -34,7 +34,7 @@ Cómo proceder:
 1. Podemos clickar la bebida que queramos para añadirla a la lista de favoritos, que se guardará en el almacenamiento local para futuras búsquedas.
 1. Podemos eliminar de favoritos la bebida que queramos, con las siguientes tres opciones:
    1. Sobre la papelera que aparece en la lista de favoritos en cada bebida.
-   1. Haciendo click sobre la bebida en la lista principal.
+   1. Haciendo click sobre la bebida en la lista principal (resultados).
    1. Podemos eliminar todos los elementos de favoritos seleccionando "Borra tus favoritos ♡".
 1. Si pulsamos el botón reset todos los datos de las listas, el buscador y el almacenamiento local se borrarán. Además, se refrescará la web.
 
