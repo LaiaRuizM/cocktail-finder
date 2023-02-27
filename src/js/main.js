@@ -30,7 +30,6 @@ function mapArray(fetchArray) {
   }));
 }
 
-
 //* When the user enter to the website or refresh the page, this function is going to be executed
 //* In line 95 the data of save cocktails has been send to LS (setItem), so now we have to pick them up (getItem) -> to show on the nav.
 //* We recall the function below
@@ -65,13 +64,27 @@ function handleClickSearch(ev) {
 //todo function to paint the list of different delicious cocktails -> Scroll through the ul list and selects the objects
 //todo This function is going to be recall (above) bc of the "slowly's" Fetch process
 function renderCocktails(drinks) {
+  cocktailsList.innerHTML = '';
   for (const eachDrink of drinks) {
-    if (eachDrink.photo) { // for each element/drink
-      cocktailsList.innerHTML += `<li class="js-liDrink" id="${eachDrink.id}"><h3 class="cocktailName1">${eachDrink.name}</h3><img src="${eachDrink.photo}" title="${eachDrink.name}" alt="${eachDrink.name}" class="cocktailImg"/></li>`;
-    } else {
-      cocktailsList.innerHTML += `<li class="js-liDrink" id="${eachDrink.id}"><h3 class="cocktailName1">${eachDrink.name}</h3><img src="https://www.drinksco.es/blog/assets/uploads/sites/2/2020/05/cocktail-3327242_1920-1170x780.jpg" title="${eachDrink.name} class="cocktailName1" alt="${eachDrink.name}" class="cocktailImg"/></li>`;
+    const cocktailIsFav = favoritesListArray.findIndex(eachCocktailFav => eachDrink.id === eachCocktailFav.id);
+    let selected = '';
+    let photoCocktail = eachDrink.photo; 
+    if (cocktailIsFav !== -1) { // for each element/drink
+      selected = 'selected';
+    } 
+    //if (cocktailIsFav === -1) {
+    //   selected = '';
+    //   cocktailsList.innerHTML += liSelected;
+    if (!photoCocktail) {
+      photoCocktail = 'https://www.drinksco.es/blog/assets/uploads/sites/2/2020/05/cocktail-3327242_1920-1170x780.jpg';
+      // cocktailsList.innerHTML += `<li class="js-liDrink" id="${eachDrink.id}"><h3 class="cocktailName1">${eachDrink.name}</h3><img src="https://www.drinksco.es/blog/assets/uploads/sites/2/2020/05/cocktail-3327242_1920-1170x780.jpg" title="${eachDrink.name} class="cocktailName1" alt="${eachDrink.name}" class="cocktailImg"/></li>`;
     }
+    const liSelected = `<li class="js-liDrink ${selected}" id="${eachDrink.id}"><h3 class="cocktailName1">${eachDrink.name}</h3><img src="${photoCocktail}" title="${eachDrink.name}" alt="${eachDrink.name}" class="cocktailImg"/></li>`;
+    cocktailsList.innerHTML += liSelected;
+    console.log(cocktailIsFav);
   }
+  // }
+  // }
   addEventToLis(); //todo To run the click function of LIs. It is to activate the click, in this moment, the click action should happen -> Execute the event click function (line 112) -> for all lis add a listener
 }
 
@@ -92,20 +105,14 @@ function renderCocktails(drinks) {
 //* The position that returns is the fav position!
 function handleClickList(ev) {
   ev.currentTarget.classList.toggle('selected');
-  //console.log(ev.currentTarget.id);
   const idSelected = ev.currentTarget.id; // busca el id del cocktail seleccionado
   const cocktailSelected = cocktailsListData.find(cocktailItem => cocktailItem.id === idSelected);  //* To introduce the selected object into cocktailSelected (id)
   const cocktailIndex = favoritesListArray.findIndex(cocktailItem => cocktailItem.id === idSelected); //* To check if it is in the fav []
-  console.log('indexToRemove:' + cocktailIndex);
-  console.log('handleClickList.favoritesListArray' + favoritesListArray);
   if (cocktailIndex === -1) {  //* Check if cocktailIndex favorite exists; if does not exist in favorites (-1), I will add it (push) to favs -> ADD
-    //ev.currentTarget.classList.add('selected');
     favoritesListArray.push(cocktailSelected);
   } else {                                          //* I check if fav's exists; if it exists (i), I will delete it (splice) to favs -> REMOVE
-    //ev.currentTarget.classList.remove('selected2');  //todo NOW
     favoritesListArray.splice(cocktailIndex, 1); 
   }
-  console.log('handleClickList.favoritesListArray' + favoritesListArray);
   renderFavoritesList(favoritesListArray);
   localStorage.setItem('favCocktailsElements', JSON.stringify(favoritesListArray)); //? We add the fav. list [] to Local through setItem. Here the fav.List[] is created. First we save them and then we will need to catch and obtain the data (getItem -> line 38). -> favCocktailsElements = key LS.
   //addEventToLis(); //todo NOW - entonces no va la X, pero sí deja quitarlas clicando y ya.
@@ -114,12 +121,10 @@ function handleClickList(ev) {
 // Paint all the favorites elements (ul fav)
 function renderFavoritesList(drinkFav) {
   favoritesList.innerHTML = '';
-  //console.log('holis');
   for (const eachDrinkFav of drinkFav) {
     favoritesList.innerHTML += `<li class="js-liDrink" id="${eachDrinkFav.id}"><h3 class="cocktailName2">${eachDrinkFav.name} <i class="trash fa-regular fa-trash-can js-iconX" id="${eachDrinkFav.id}"></i></h3><img src="${eachDrinkFav.photo}" title="${eachDrinkFav.name}" alt="${eachDrinkFav.name}" class="cocktailImg2"/></li>`;
   }
   addEventToX();
-  addEventToLis(); //todo NOW - pero no va la trash.
 }
 
 //* Function addEvList of iconX
@@ -131,7 +136,7 @@ function handleClickIcon(event) {
     favoritesListArray.splice(cocktailIndex, 1); // In this position, removes one (the one that I am interested on)
   }
   renderFavoritesList(favoritesListArray);
-  //renderCocktails(cocktailsListData);
+  renderCocktails(cocktailsListData);
   localStorage.setItem('favCocktailsElements', JSON.stringify(favoritesListArray));
 }
 
@@ -144,7 +149,6 @@ function handleClickReset() {
 }
 
 function handleClickDelete() {
-  //cocktailsList.innerHTML = '';
   favoritesList.innerHTML = '';
   localStorage.removeItem('favCocktailsElements');
   location.reload();
@@ -156,8 +160,6 @@ searchBtn.addEventListener('click', handleClickSearch);
 //todo Event listener in any kind of cocktails (drinks) list. -> In line 75
 function addEventToLis() {
   const liDrinkElements = document.querySelectorAll('.js-liDrink');
-  console.log('addEventToLis.liDrinkElements' + liDrinkElements);
-  console.log('addEventToLis.favoritesListArray' + favoritesListArray);
   for (const eachLi of liDrinkElements) {
     eachLi.addEventListener('click', handleClickList);
   }
