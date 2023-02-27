@@ -6,12 +6,6 @@
 @import 'layout/footer';
 @import 'pages/index';
 
-
-// .allLists {
-//   display: grid;
-//   grid-template-columns: 1fr 1fr;
-//   width: 50%;
-// }
 .main {
     &--section--1 {
         display: flex;
@@ -20,7 +14,6 @@
         align-items: center;
         justify-content: center;
         margin: 20px 0 20px auto;
-        //background: linear-gradient(lightgray, whitesmoke);
         &__title {
             font-size: 25px;
         }
@@ -32,14 +25,13 @@
             }
             &__search {
                 border-radius: 10px;
-                background: linear-gradient(rgb(211, 211, 211), rgb(244, 154, 154));
+                background: $color-background-gr-pi;
                 padding: 5px 10px 5px 10px;
                 cursor: context-menu;
             }
             &__reset {
                 border-radius: 10px;
-                background: linear-gradient(rgb(211, 211, 211), rgb(244, 154, 154));
-                background: linear-gradient(rgb(244, 154, 154), rgb(211, 211, 211));
+                background: $color-background-pi-gr;
                 padding: 5px 10px 5px 10px;
                 cursor: pointer;
             }
@@ -55,23 +47,22 @@
     }
     &--section--2 {
     display: flex;
-    background: linear-gradient(lightgray, rgb(111, 108, 108));
-    //background: linear-gradient(rgb(111, 108, 108), lightgray);
+    background: $color-background-grx2;
     box-shadow: -4px 3px 10px 10px black;
     &--article1 {
         box-shadow: 0px 0px 5px 1px black;
-        border: 4px solid rgb(244, 154, 154); 
+        border: $color-background-pinksolid;
         margin-left: 400px;  
     &__title {
         text-transform: uppercase;
         font-weight: bold;
         text-align: center;
         margin: 15px 15px;
-        font-size: 20px;
+        font-size: 30px;
     }
     }
     &--article2 {
-        border: 4px dashed rgb(244, 154, 154);
+        border: $color-background-pinkdashed;
         margin-left: 200px;
         box-shadow: 0px 0px 5px 1px black;
     &__title {
@@ -79,7 +70,7 @@
         font-weight: bold;
         text-align: center;
         margin: 15px 15px;
-        font-size: 20px;
+        font-size: 30px;
     }
     &__delete {
         height: 60px;
@@ -87,13 +78,12 @@
         font-size: 20px;
         border-radius: 5px;
         border: none;
-        background: linear-gradient(lightgray, rgb(111, 108, 108));
+        background: $color-background-grx2;
         color: whitesmoke;
-        border: 1px solid rgb(247, 202, 202);
+        border: $color-background-pinksolidlight;
+        box-shadow: 6px 8px 15px rgb(247, 202, 202);
         cursor: pointer;
-        &__span {
-            color: rgb(247, 202, 202);
-        }
+        margin-left: 50px;
     }
     }
     }
@@ -102,31 +92,40 @@
     width: 210px;
     margin: 10px 0 20px 20px;
     }
-
     .cocktailName1 {
         margin-left: 20px;
     }
-
     .cocktailImg2 {
         height: 295px;
         width: 210px;
-        margin: 10px 20px 20px 20px;
+        margin: 10px 25px 20px 25px;
+        box-shadow: 6px 8px 15px;
     }
-
     .cocktailName2 {
-        margin-left: 20px;
-        color: red;
+        margin: 0 20px 0 20px;
+        color: black;
+        background: $color-background-gr-pi;
+        padding: 10px;
     }
-
     .selected {
-    background: linear-gradient(rgb(244, 154, 154), rgb(211, 211, 211));
+    background: $color-background-pi-gr;
     color: white;
     margin: 20px 0 20px 0;
     padding-top: 10px;
     transform: scaleX(1.5);
     text-transform: uppercase;
-    border: 1px solid black;
+    box-shadow: 6px 8px 15px black;
     }
 }
+.trash {
+    font-size: 25px;
+    margin-left: 90px;
+    box-shadow: 6px 8px 12px black;
+    align-items: flex-end;
+    background: $color-background-grx2;
+}
 
-
+//todo NOW
+// .selected2 {
+//     background-color: red;
+// }

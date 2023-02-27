@@ -2,7 +2,7 @@
    display: flex;
    justify-content: space-between;
    align-items: center;
-   border-top: 4px rgb(111, 108, 108);
+   border-top: 4px $color-grey;
    padding: 0 35px;
    height: 100px;
    margin-top: 40px;
@@ -12,13 +12,13 @@
     gap: 20px;
     &__title {
     font-family: 'Indie Flower', cursive;
-    color: rgb(111, 108, 108);
+    color: $color-grey;
     font-size: 18px;
     }
     &__link {
         text-decoration: none;
         cursor: alias;
-        color: rgba(244, 154, 154, 0.95);
+        color: $color-pink;
         font-family: 'Indie Flower', cursive;
         cursor: alias;
         font-size: 20px;
@@ -44,14 +44,14 @@
         font-family: 'Indie Flower', cursive;
         cursor: alias;
         text-decoration: none;
-        color: rgba(244, 154, 154, 0.95);
+        color: $color-pink;
         font-size: 20px;
     }
     &__span {
         font-family: 'Indie Flower', cursive;
         cursor: alias;
         text-decoration: none;
-        color: rgb(111, 108, 108);
+        color: $color-grey;
     }
    }
 }

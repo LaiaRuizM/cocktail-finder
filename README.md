@@ -32,10 +32,10 @@ Cómo proceder:
 1. Buscar en la barra de búsqueda, el cocktail que queramos.
 1. Nos aparece una lista con los cocktails que contienen las palabras/letras escritas. Detecta mayúsuclas, minúsculas, coincidencias de letras/palabras.
 1. Podemos clickar la bebida que queramos para añadirla a la lista de favoritos, que se guardará en el almacenamiento local para futuras búsquedas.
-1. Podemos eliminar de favoritos la bebida que queramos, pulsando
-   1. I. sobre la papelera que aparece en la lista de favoritos en cada bebida.
-   1. II. Haciendo click sobre la bebida en la lista principal.
-   1. III. Podemos eliminar todos los elementos de favoritos seleccionando "Borra tus favoritos ♡".
+1. Podemos eliminar de favoritos la bebida que queramos, con las siguientes tres opciones:
+   1. Sobre la papelera que aparece en la lista de favoritos en cada bebida.
+   1. Haciendo click sobre la bebida en la lista principal.
+   1. Podemos eliminar todos los elementos de favoritos seleccionando "Borra tus favoritos ♡".
 1. Si pulsamos el botón reset todos los datos de las listas, el buscador y el almacenamiento local se borrarán. Además, se refrescará la web.
 
 #### -- Conocimientos aplicados en este ejercicio --

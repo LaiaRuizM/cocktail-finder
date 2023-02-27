@@ -69,15 +69,15 @@ function renderCocktails(drinks) {
     if (eachDrink.photo) {
       cocktailsList.innerHTML += `<li class="js-liDrink" id="${eachDrink.id}"><h3 class="cocktailName1">${eachDrink.name}</h3><img src="${eachDrink.photo}" title="${eachDrink.name}" alt="${eachDrink.name}" class="cocktailImg"/></li>`;
     } else {
-      cocktailsList.innerHTML += `<li class="js-liDrink" id="${eachDrink.id}"><h3 class="cocktailName1">${eachDrink.name}</h3><img src="https://www.drinksco.es/blog/assets/uploads/sites/2/2020/05/cocktail-3327242_1920-1170x780.jpg" title="${eachDrink.name} class="cocktailName" alt="${eachDrink.name}" class="cocktailImg"/></li>`;
+      cocktailsList.innerHTML += `<li class="js-liDrink" id="${eachDrink.id}"><h3 class="cocktailName1">${eachDrink.name}</h3><img src="https://www.drinksco.es/blog/assets/uploads/sites/2/2020/05/cocktail-3327242_1920-1170x780.jpg" title="${eachDrink.name} class="cocktailName1" alt="${eachDrink.name}" class="cocktailImg"/></li>`;
     }
   }
   addEventToLis(); //todo To run the click function of LIs. It is to activate the click, in this moment, the click action should happen -> Execute the event click function (line 112)
 }
 
-//* Check if the selected cocktail is on favoritesListArray
+// //* Check if the selected cocktail is on favoritesListArray
 // function already() {
-//   const cocktailIsFav = favoritesListArray.find(eachCocktailFav => cocktailsListData.id === eachCocktailFav.id);
+//   let cocktailIsFav = favoritesListArray.find(eachCocktailFav => cocktailsListData.id === eachCocktailFav.id);
 //   if (cocktailIsFav !== -1) {  //adds the class selected
 //     cocktailIsFav = 'selected';
 //   }
@@ -92,8 +92,8 @@ function renderCocktails(drinks) {
 //* The position that returns is the fav position!
 function handleClickList(ev) {
   ev.currentTarget.classList.toggle('selected');
-  console.log(ev.currentTarget.id);
-  const idSelected = ev.currentTarget.id;
+  //console.log(ev.currentTarget.id);
+  const idSelected = ev.currentTarget.id; // busca el id del cocktail seleccionado
   const cocktailSelected = cocktailsListData.find(cocktailItem => cocktailItem.id === idSelected);  //* To introduce the selected object into cocktailSelected (id)
   const cocktailIndex = favoritesListArray.findIndex(cocktailItem => cocktailItem.id === idSelected); //* To check if it is in the fav []
   console.log(cocktailIndex);
@@ -101,11 +101,12 @@ function handleClickList(ev) {
     //ev.currentTarget.classList.add('selected');
     favoritesListArray.push(cocktailSelected);
   } else {                                          //* I check if fav's exist; if it exists (i), I will delete it (splice) to favs -> REMOVE
-    //ev.currentTarget.classList.remove('selected');
+    //ev.currentTarget.classList.remove('selected2');  //todo NOW
     favoritesListArray.splice(cocktailIndex, 1); 
   }
   renderFavoritesList(favoritesListArray);
   localStorage.setItem('cocktailsElements', JSON.stringify(favoritesListArray)); //? We add the fav. list [] to Local through setItem. Here the fav.List[] is created. First we save them and then we will need to catch and obtain the data (getItem -> line 38). -> cocktailsElements = key LS.
+  //addEventToLis(); //todo NOW - entonces no va la X, pero sí deja quitarlas clicando y ya.
 }
 
 // Paint all the favorites elements (ul fav)
@@ -113,7 +114,7 @@ function renderFavoritesList(drinkFav) {
   favoritesList.innerHTML = '';
   console.log('holis');
   for (const eachDrinkFav of drinkFav) {
-    favoritesList.innerHTML += `<li class="js-liDrink" id="${eachDrinkFav.id}"><h3 class="cocktailName2">${eachDrinkFav.name} <i class="fa-regular fa-trash-can js-iconX" id="${eachDrinkFav.id}"></i></h3><img src="${eachDrinkFav.photo}" title="${eachDrinkFav.name}" alt="${eachDrinkFav.name}" class="cocktailImg2"/></li>`;
+    favoritesList.innerHTML += `<li class="js-liDrink" id="${eachDrinkFav.id}"><h3 class="cocktailName2">${eachDrinkFav.name} <i class="trash fa-regular fa-trash-can js-iconX" id="${eachDrinkFav.id}"></i></h3><img src="${eachDrinkFav.photo}" title="${eachDrinkFav.name}" alt="${eachDrinkFav.name}" class="cocktailImg2"/></li>`;
   }
   addEventToX();
 }
@@ -171,25 +172,3 @@ resetBtn.addEventListener('click', handleClickReset);
 //* Delete favorites in his section
 deleteBtn.addEventListener('click', handleClickDelete);
 
-
-// //* Animation cocktail
-// const moveDrinks = document.querySelector('.js-moveDrinks');
-// moveDrinks.onclick = function() {
-//   this.onclick = null; // solo el primer clic debe comenzar la animación
-//   let times = 1;
-//   function go() {
-//     if (times % 2) {
-//       moveDrinks.classList.remove('back');
-//       moveDrinks.style.marginLeft = 100 * times + 200 + 'px';
-//     } else {
-//       moveDrinks.classList.add('back');
-//       moveDrinks.style.marginLeft = 100 * times - 200 + 'px';
-//     }
-//   }
-
-//   go();
-//   moveDrinks.addEventListener('transitionend', function() {
-//     times++;
-//     go();
-//   });
-// };  

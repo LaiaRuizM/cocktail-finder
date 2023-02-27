@@ -1,15 +1,11 @@
-// Esta es la variable que usaremos como tamaño por defecto
-$defaultFontSize: 16;
-
-// Estos son los tamaños para las media-queries
-
-$breakpoint-tablet: 768px;
-$breakpoint-desktop: 1024px;
-
-// fonts
-// $font-main: 'Roboto', sans-serif;
-
-// colors
-// $color-text: #000;
-// $color-title: #000;
-// $color-background: #999;
+$color-background-gr-pi: linear-gradient(rgb(211, 211, 211), rgb(244, 154, 154));
+$color-background-pi-gr: linear-gradient(rgb(244, 154, 154), rgb(211, 211, 211));
+$color-background-grx2: linear-gradient(lightgray, rgb(111, 108, 108));
+$color-background-pinksolid: 4px solid rgb(244, 154, 154);
+$color-background-pinkdashed: 4px dashed rgb(244, 154, 154);
+$color-background-pinkdashed2: 2px dashed rgb(244, 154, 154);
+$color-background-pinksolidlight: 1px solid rgb(247, 202, 202);
+$color-background-gr-wh: linear-gradient(lightgray, whitesmoke);
+$color-background-pink: rgb(247, 202, 202);
+$color-grey: rgb(111, 108, 108);
+$color-pink: rgba(244, 154, 154, 0.95);
