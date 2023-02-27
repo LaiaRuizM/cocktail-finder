@@ -15,7 +15,6 @@ let favoritesListArray = [];
 fetch(url)
   .then((response) => response.json())
   .then((data) => {
-    console.log(data);
     mapArray(data);
     renderCocktails(cocktailsListData);
   });
@@ -35,7 +34,6 @@ function getFav() {
   if (favLs) {
     favoritesListArray = favLs;
     renderFavoritesList(favoritesListArray);
-    console.log('HOLISSSSSS');
   }
 }
 getFav();
@@ -66,13 +64,12 @@ function renderCocktails(drinks) {
     let photoCocktail = eachDrink.photo;
     if (cocktailIsFav !== -1) {
       selected = 'selected';
-    } 
+    }
     if (!photoCocktail) {
       photoCocktail = 'https://www.drinksco.es/blog/assets/uploads/sites/2/2020/05/cocktail-3327242_1920-1170x780.jpg';
     }
     const liSelected = `<li class="js-liDrink ${selected}" id="${eachDrink.id}"><h3 class="cocktailName1">${eachDrink.name}</h3><img src="${photoCocktail}" title="${eachDrink.name}" alt="${eachDrink.name}" class="cocktailImg"/></li>`;
     cocktailsList.innerHTML += liSelected;
-    console.log(cocktailIsFav);
   }
   addEventToLis();
 }
@@ -96,16 +93,16 @@ function handleClickList(ev) {
 function renderFavoritesList(drinkFav) {
   favoritesList.innerHTML = '';
   for (const eachDrinkFav of drinkFav) {
-    favoritesList.innerHTML += `<li class="js-liDrink" id="${eachDrinkFav.id}"><h3 class="cocktailName2">${eachDrinkFav.name} <i class="trash fa-regular fa-trash-can js-iconX" id="${eachDrinkFav.id}"></i></h3><img src="${eachDrinkFav.photo}" title="${eachDrinkFav.name}" alt="${eachDrinkFav.name}" class="cocktailImg2"/></li>`;
+    favoritesList.innerHTML += `<li><h3 class="cocktailName2">${eachDrinkFav.name} <i class="trash fa-regular fa-trash-can js-iconX" id="${eachDrinkFav.id}"></i></h3><img src="${eachDrinkFav.photo}" title="${eachDrinkFav.name}" alt="${eachDrinkFav.name}" class="cocktailImg2"/></li>`;
   }
   addEventToX();
 }
 
-//* Function addEvList of iconX
+//* Function addEvList of iconX 
 function handleClickIcon(event) {
   event.preventDefault();
   const idSelected = event.currentTarget.id;
-  const cocktailIndex = favoritesListArray.findIndex(cocktailItem => cocktailItem.id === idSelected); 
+  const cocktailIndex = favoritesListArray.findIndex(cocktailItem => cocktailItem.id === idSelected);
   if (cocktailIndex !== -1) {
     favoritesListArray.splice(cocktailIndex, 1);
   }
