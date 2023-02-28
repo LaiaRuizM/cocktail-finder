@@ -10,10 +10,11 @@ const deleteBtn = document.querySelector('.js-delete');
 const url = `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=margarita`;
 let cocktailsListData = [];
 let favoritesListArray = [];
+const logBtn = document.querySelector('.js-logBtn');
 
 //* Server request. When the user is loading the page, the list of Cocktails should appear
 fetch(url)
-  .then((response) => response.json())
+  .then((response) => response.json()) //Proceso asíncrono, por eso no podemos unirlo en una línea - w8ing.
   .then((data) => {
     mapArray(data);
     renderCocktails(cocktailsListData);
@@ -25,6 +26,7 @@ function mapArray(fetchArray) {
     name: showDrink.strDrink,
     photo: showDrink.strDrinkThumb,
     id: showDrink.idDrink,
+    ingredients: showDrink.strIngredient1 + ' ' + showDrink.strIngredient2 + ' ' + showDrink.strIngredient3
   }));
 }
 
@@ -38,7 +40,8 @@ function getFav() {
 }
 getFav();
 
-//* Function handleClickSearch button to search any kind of cocktail (user's value)
+//* Function handleClickSearch button to search any kind of cocktail (user's value) 
+//todo REFACTORIZAR.
 function handleClickSearch(ev) {
   ev.preventDefault();
   const inputUserCocktail = inputElement.value.toLowerCase();
@@ -68,7 +71,7 @@ function renderCocktails(drinks) {
     if (!photoCocktail) {
       photoCocktail = 'https://www.drinksco.es/blog/assets/uploads/sites/2/2020/05/cocktail-3327242_1920-1170x780.jpg';
     }
-    const liSelected = `<li class="js-liDrink ${selected}" id="${eachDrink.id}"><h3 class="cocktailName1">${eachDrink.name}</h3><img src="${photoCocktail}" title="${eachDrink.name}" alt="${eachDrink.name}" class="cocktailImg"/></li>`;
+    const liSelected = `<li class="js-liDrink ${selected}" id="${eachDrink.id}"><h3 class="cocktailName1">${eachDrink.name}</h3><p class="ingredients"> ${eachDrink.ingredients}</p><img src="${photoCocktail}" title="${eachDrink.name}" alt="${eachDrink.name}" class="cocktailImg"/></li>`;
     cocktailsList.innerHTML += liSelected;
   }
   addEventToLis();
@@ -136,6 +139,11 @@ function addEventToLis() {
   }
 }
 
+function handleClickLogBtn(ev) {
+  ev.preventDefault();
+  console.log(`Tienes ${favoritesListArray.length}`);
+}
+
 //* Delete each favorite pressing "x" (li)
 function addEventToX() {
   const iconsX = document.querySelectorAll('.js-iconX');
@@ -150,3 +158,5 @@ resetBtn.addEventListener('click', handleClickReset);
 //* Delete favorites in his section
 deleteBtn.addEventListener('click', handleClickDelete);
 
+//* Interviw: LOG btn
+logBtn.addEventListener('click', handleClickLogBtn);
