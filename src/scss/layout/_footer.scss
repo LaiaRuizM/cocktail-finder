@@ -55,3 +55,12 @@
     }
    }
 }
+
+.fa-brands{
+    color: $color-pink;
+    margin: 5px 0 0 10px;
+    cursor: pointer;
+    &:hover {
+        transform: scale(140%);
+    }
+}
