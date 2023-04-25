@@ -1,4 +1,4 @@
-![Laia Ruiz Martínez](./LaiaRuizM.png)
+![Laia Ruiz Martínez](./LaiaRuizMartinez.png)
 
 If you want to see the project: https://laiaruizm.github.io/cocktail-finder/
 
