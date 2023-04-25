@@ -1,5 +1,5 @@
 <p align="center" style="margin-center:10%">
-<img src="./LaiaRuiz.png" alt="Laia" width="280"/>
+<img src="./LaiaRuizMartinez.png" alt="Laia" width="280"/>
 </p>
 
 If you want to see the project: https://laiaruizm.github.io/cocktail-finder/
