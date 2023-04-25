@@ -1,4 +1,6 @@
-![Laia Ruiz Martínez](src/images/Laia.png)
+![Laia Ruiz Martínez](./LaiaRuizM.png)
+
+If you want to see the project: https://laiaruizm.github.io/cocktail-finder/
 
 ## EJERCICIO DE EVALUACIÓN MÓDULO 2 | LAIA RUIZ MARTÍNEZ
 
